@@ -25,13 +25,22 @@
             />
         </div>
 
+        <ChatMessage v-if="isThinking" message="AI is analyzing your data..." :isUser="false" />
+
         <!-- Input Bar -->
         <div class="mt-4 flex gap-3">
-            <input type="text" placeholder="Ask about spending trends, forecasts, or savings..."
-                class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-inidigo-500"
+            <input 
+                v-model="input" 
+                type="text" 
+                placeholder="AI assistant will be available once backend is connected"
+                class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm" 
+                disabled 
             />
 
-            <button class="bg-indigo-600 hover:bg-indigo-500 transition text-white px-5 rounded-lg text-sm">Ask</button>
+            <button class="bg-gray-700 text-gray-400 px-5 rounded-lg text-sm cursor-not-allowed"
+                disabled>
+                Ask
+            </button>
         </div>
     </div>
 </template>
@@ -50,4 +59,7 @@
             isUser: false,
         },
     ])
+
+    const input = ref('')
+    const isThinking = ref(false)
 </script>

@@ -7,14 +7,15 @@
         </div>
 
         <!-- KPI Section-->
-        <div class="grid grid-cols01 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <AnalyticsKPI label="Total Income" value="$0.00" subtitle="This period" />
+        <div v-if="isLoading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div v-for="i in 4" :key="i" class="h-24 bg-gray-800 rounded-xl animate-pulse"/>
+        </div>
 
-            <AnalyticsKPI label="Total Expenses" value="$0.00" subtitle="This period" />
-
-            <AnalyticsKPI label="Net Savings" value="$0.00" subtitle="Income - Expenses" />
-
-            <AnalyticsKPI label="Avg Monthly Spend" value="$0.00" subtitle="Rolling Average" />
+        <div v-else-if="!hasData" class="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center text-gray-400">
+            <AnalyticsKPI label="Total Income" value="$0.00" />
+            <AnalyticsKPI label="Total Expenses" value="$0.00" />
+            <AnalyticsKPI label="Net Savings" value="$0.00" />
+            <AnalyticsKPI label="Average Monthly Spend" value="$0.00" />
         </div>
 
         <!-- Main Analytics Grid -->
@@ -25,8 +26,8 @@
                 <h3 class="text-lg font-semibold mb-4">Spending Over Time</h3>
             </div>
 
-            <div class="h-64 flex items-center justify-center text-gray-500 text-sm border border-dashed">
-                Time-series chart will render here
+            <div class="h-64 flex items-center justify-center text-gray-500 text-sm border border-dashed border-gray-700 rounded-lg">
+                Analytics chart will appear once data is available
             </div>
         </div>
 
@@ -55,5 +56,9 @@
 </template>
 
 <script setup>
+    import { ref } from 'vue'
     import AnalyticsKPI from '../components/AnalyticsKPI.vue'
+
+    const isLoading = ref(false)
+    const hasData = ref(false)
 </script>
