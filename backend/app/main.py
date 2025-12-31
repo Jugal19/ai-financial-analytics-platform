@@ -1,7 +1,11 @@
 from fastapi import FastAPI
+from app.core.config import settings
 
-app = FastAPI(title="AI Financial Analytics API")
+app = FastAPI(title=settings.APP_NAME)
 
-@app.get("/")
-def root():
-    return {"status": "Backend running"}
+@app.get("/health")
+def health_check():
+    return {
+        "status": "ok",
+        "app": settings.APP_NAME
+    }
